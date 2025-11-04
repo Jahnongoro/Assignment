@@ -1,31 +1,11 @@
-<!doctype html>
+ <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Enhanced Form — Accessible HTML5 Form Example</title>
   <meta name="description" content="Accessible, semantic HTML5 form demo with validation, media, lists and table results." />
-  <style>
-    :root{font-family:system-ui,Segoe UI,Roboto,Arial;line-height:1.5;color:#111}
-    body{margin:0;padding:1rem;background:#bdc2d6}
-    header,main,footer{max-width:980px;margin:0 auto}
-    header{padding:.75rem 0}
-    .container{background:#cf0f0f;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-    form{display:grid;gap:0.75rem}
-    .row{display:flex;gap:.75rem;flex-wrap:wrap}
-    .col{flex:1;min-width:220px}
-    label{display:block;font-weight:600;margin-bottom:.25rem}
-    input,select,textarea,button{width:100%;padding:.5rem;border:1px solid #0f60da;border-radius:6px}
-    fieldset{border:1px solid #81960e;padding:.75rem;border-radius:6px}
-    legend{font-weight:700}
-    .hint{font-size:.875rem;color:#6b7280}
-    table{width:100%;border-collapse:collapse;margin-top:.75rem}
-    th,td{padding:.5rem;border:1px solid #687691;text-align:left}
-    .media{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
-    .success{background:#1fc477;color:#064e3b;padding:.5rem;border-radius:6px;margin-top:.5rem}
-    .error{background:#fffbeb;color:#92400e;padding:.5rem;border-radius:6px;margin-top:.5rem}
-    footer{margin-top:1rem;text-align:center;color:#6b7280}
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
@@ -57,7 +37,7 @@
             <div class="col">
               <label for="username">Username</label>
               <input id="username" name="username" type="text" placeholder="user_123" required pattern="^[A-Za-z0-9_]{3,20}$" autocomplete="username" minlength="3" maxlength="20" aria-describedby="usernameHint" />
-              <div id="usernameHint" class="hint">3–20 characters, letters, numbers and underscore only.</div>
+              <div id="usernameHint" class="hint">3–20 characters: letters, numbers, underscore.</div>
             </div>
 
             <div class="col">
@@ -160,14 +140,14 @@
           <div class="hint">Passwords must match. The form will validate on submit.</div>
         </fieldset>
 
-        <div class="row" style="align-items:center">
+        <div class="row controls">
           <button type="submit">Submit order</button>
           <button type="reset">Reset</button>
-          <div id="formMessage" aria-live="polite" style="flex:1"></div>
+          <div id="formMessage" aria-live="polite" class="message" ></div>
         </div>
       </form>
 
-      <section aria-labelledby="results-heading" style="margin-top:1rem">
+      <section aria-labelledby="results-heading" class="results">
         <h3 id="results-heading">Submitted entries</h3>
         <p class="hint">Entries submitted in this session are shown below.</p>
 
@@ -183,7 +163,7 @@
       </section>
     </section>
 
-    <aside class="container" aria-labelledby="media-heading" style="margin-top:1rem">
+    <aside class="container media-block" aria-labelledby="media-heading">
       <h2 id="media-heading">Media & Resources</h2>
 
       <p>Useful resources:</p>
@@ -193,12 +173,12 @@
       </ul>
 
       <div class="media" aria-hidden="false">
-        <figure style="max-width:320px">
-          <img src="https://picsum.photos/seed/form/320/180" alt="Decorative form illustration" style="width:100%;height:auto;border-radius:6px" />
+        <figure class="media-item">
+          <img src="https://picsum.photos/seed/form/320/180" alt="Decorative form illustration" />
           <figcaption class="hint">Illustration: form layout</figcaption>
         </figure>
 
-        <figure style="max-width:320px">
+        <figure class="media-item">
           <video controls width="320" aria-label="Short demo video">
             <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
             Your browser does not support the video element.
@@ -208,7 +188,7 @@
       </div>
     </aside>
 
-    <section class="container" aria-labelledby="features-heading" style="margin-top:1rem">
+    <section class="container" aria-labelledby="features-heading">
       <h2 id="features-heading">Form features (summary)</h2>
       <ol>
         <li>Semantic markup: fieldset/legend, label associations, ARIA where helpful.</li>
@@ -237,12 +217,13 @@
     const discountRange = document.getElementById('discountRange');
     const discountOutput = document.getElementById('discountOutput');
 
-    discountOutput.value = discountRange.value;
-    discountRange.addEventListener('input', () => discountOutput.textContent = discountRange.value);
+    if (discountRange && discountOutput) {
+      discountOutput.value = discountRange.value;
+      discountRange.addEventListener('input', () => discountOutput.textContent = discountRange.value);
+    }
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      // HTML5 validation
       if (!form.checkValidity()) {
         form.reportValidity();
         formMessage.textContent = 'Please fix the highlighted fields.';
@@ -250,7 +231,6 @@
         return;
       }
 
-      // Additional validation: password match
       const pwd = form.password.value;
       const conf = form.confirmPassword.value;
       if (pwd !== conf) {
@@ -260,7 +240,6 @@
         return;
       }
 
-      // Build result row
       const now = new Date().toLocaleString();
       const row = document.createElement('tr');
       row.innerHTML = `<td>${now}</td>
@@ -268,7 +247,6 @@
                        <td><a href="mailto:${escapeHtml(form.email.value)}">${escapeHtml(form.email.value)}</a></td>
                        <td>${escapeHtml(form.product.value)}</td>
                        <td>${escapeHtml(form.quantity.value)}</td>`;
-      // Remove placeholder row if present
       if (resultsBody.children.length === 1 && resultsBody.children[0].children.length === 1) {
         resultsBody.innerHTML = '';
       }
@@ -277,7 +255,6 @@
       formMessage.textContent = 'Order submitted successfully.';
       formMessage.className = 'success';
 
-      // Optionally reset file input while keeping other fields
       form.fileUpload.value = '';
       form.reset();
     });
