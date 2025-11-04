@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aurora — Home</title>
+  <meta name="description" content="Aurora — multipage demo showcasing responsive HTML5, CSS3 and JavaScript interactivity." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Aurora home">Aurora</a>
+
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainMenu">Menu</button>
+        <ul id="mainMenu" class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-left">
+        <h1 id="heroTitle">Beautiful responsive multipage site</h1>
+        <p class="lead">Built with semantic HTML5, modern CSS and small JavaScript utilities — image slider, responsive nav and accessible form.</p>
+        <p><a class="cta" href="contact.html">Get in touch</a></p>
+      </div>
+
+      <div class="hero-right">
+        <!-- Slider: images loaded from Unsplash (public placeholders) -->
+        <div class="slider" id="mainSlider" aria-roledescription="carousel">
+          <button class="slider-prev" aria-label="Previous slide">&larr;</button>
+          <div class="slides">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=60&auto=format&fit=crop" alt="Aurora scene 1" />
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=60&auto=format&fit=crop" alt="Aurora scene 2" />
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1200&q=60&auto=format&fit=crop" alt="Aurora scene 3" />
+          </div>
+          <button class="slider-next" aria-label="Next slide">&rarr;</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" aria-labelledby="featuresTitle">
+      <h2 id="featuresTitle">What you'll find here</h2>
+      <div class="grid features-grid">
+        <article>
+          <h3>Responsive design</h3>
+          <p>Layouts that adapt across devices using Flexbox and CSS Grid.</p>
+        </article>
+        <article>
+          <h3>Accessible markup</h3>
+          <p>Semantic HTML, ARIA attributes and keyboard controls where needed.</p>
+        </article>
+        <article>
+          <h3>Interactive components</h3>
+          <p>Image slider, navigation toggle and a custom validated contact form.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <small>© <time datetime="2025-11-04">2025</time> Aurora demo — multipage site</small>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aurora — About</title>
+  <meta name="description" content="About Aurora — project info and team." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Aurora</a>
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <button id="navToggleAbout" class="nav-toggle" aria-expanded="false" aria-controls="menuAbout">Menu</button>
+        <ul id="menuAbout" class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section aria-labelledby="aboutTitle">
+      <h1 id="aboutTitle">About this project</h1>
+      <p>This is a small multipage website demo. It demonstrates:</p>
+      <ul>
+        <li>Semantic HTML structure</li>
+        <li>Responsive CSS (Flexbox & Grid)</li>
+        <li>JavaScript interactivity: slider, nav toggle, form validation</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="teamTitle" class="team">
+      <h2 id="teamTitle">Team & Credits</h2>
+      <table class="credits">
+        <thead><tr><th>Role</th><th>Name</th></tr></thead>
+        <tbody>
+          <tr><td>Design</td><td>Student</td></tr>
+          <tr><td>Development</td><td>Student</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><small>© 2025 Aurora demo</small></div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aurora — Contact</title>
+  <meta name="description" content="Contact Aurora — send a message using the custom validated form." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Aurora</a>
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <button id="navToggleContact" class="nav-toggle" aria-expanded="false" aria-controls="menuContact">Menu</button>
+        <ul id="menuContact" class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="contactMain">
+    <section aria-labelledby="contactTitle">
+      <h1 id="contactTitle">Contact us</h1>
+      <p class="lead">Use the form below. Validation is handled by JavaScript (custom logic).</p>
+
+      <form id="contactForm" class="form" novalidate>
+        <div class="form-row">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" placeholder="Jane Doe" autocomplete="name" required />
+        </div>
+
+        <div class="form-row">
+          <label for="email">Email address</label>
+          <input id="emailField" name="email" type="email" placeholder="name@example.com" autocomplete="email" required />
+        </div>
+
+        <div class="form-row">
+          <label for="subject">Subject</label>
+          <input id="subject" name="subject" type="text" placeholder="Subject" required />
+        </div>
+
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" placeholder="Your message" required minlength="10"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button id="sendBtn" type="submit">Send message</button>
+          <button type="reset">Reset</button>
+          <div id="contactFeedback" aria-live="polite" class="feedback"></div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><small>© 2025 Aurora demo</small></div>
+  </footer>
+
+  <script src="assets/js/contact.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
+
+/* style.css
+   Multipage demo styles: responsive layout, transitions and keyframes
+   Comments indicate major sections for maintainability
+*/
+
+/* -------------------------------------
+   Base reset and box model
+   ------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html,body{ height:100%; margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; color:#111; background:#f5f7fb; }
+
+/* -------------------------------------
+   CSS variables / theme
+   ------------------------------------- */
+:root{
+  --container: 1100px;
+  --gap: 16px;
+  --accent: #2563eb;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --radius: 10px;
+}
+
+/* -------------------------------------
+   Container & header (Flexbox)
+   ------------------------------------- */
+.container { max-width: var(--container); margin: 0 auto; padding: 20px; }
+.header-inner { display:flex; align-items:center; justify-content:space-between; gap:var(--gap); background:var(--card); padding:12px; border-bottom:1px solid #e6e9ef; }
+.brand { font-weight:700; text-decoration:none; color:var(--accent); font-size:1.2rem; }
+
+/* Nav */
+.main-nav { position:relative; }
+.nav-list { list-style:none; margin:0; padding:0; display:flex; gap:12px; }
+.nav-list a { text-decoration:none; color:#111; padding:6px 8px; border-radius:6px; }
+.nav-toggle { display:none; background:transparent; border:1px solid #e6e9ef; padding:6px 8px; border-radius:6px; }
+
+/* -------------------------------------
+   Hero / slider (Grid)
+   ------------------------------------- */
+.hero { display:grid; grid-template-columns: 1fr 480px; gap:20px; align-items:center; padding:24px 0; }
+.hero .lead { color:var(--muted); }
+.cta { display:inline-block; margin-top:12px; background:var(--accent); color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; }
+
+/* Slider */
+.slider { position:relative; overflow:hidden; border-radius:10px; }
+.slider .slides { display:flex; transition: transform 480ms cubic-bezier(.2,.9,.2,1); }
+.slider img { width:100%; height:320px; object-fit:cover; display:block; }
+.slider-prev, .slider-next { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.4); color:#fff; border:none; padding:8px; border-radius:6px; cursor:pointer; }
+.slider-prev { left:10px; } .slider-next { right:10px; }
+
+/* -------------------------------------
+   Features grid (auto-fit)
+   ------------------------------------- */
+.features-grid { display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom:20px; }
+.features-grid article { background:var(--card); padding:16px; border-radius:8px; box-shadow:0 6px 18px rgba(2,6,23,0.04); }
+
+/* -------------------------------------
+   Forms and utilities
+   ------------------------------------- */
+.form { background:var(--card); padding:16px; border-radius:8px; box-shadow:0 6px 18px rgba(2,6,23,0.04); }
+.form-row { display:flex; flex-direction:column; margin-bottom:12px; }
+.form-row label { font-weight:600; margin-bottom:6px; }
+.form-row input, .form-row textarea { padding:10px; border:1px solid #e6e9ef; border-radius:6px; font:inherit; }
+
+/* feedback */
+.feedback { margin-left:8px; color:var(--muted); }
+
+/* -------------------------------------
+   Table / credits
+   ------------------------------------- */
+.credits { border-collapse:collapse; width:100%; }
+.credits th, .credits td { padding:10px; border:1px solid #eef2f7; }
+
+/* -------------------------------------
+   Animations & transitions
+   ------------------------------------- */
+/* slider fade for images when switching with transform */
+@keyframes fadeIn {
+  from { opacity: .3; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.slide-in { animation: fadeIn 420ms ease both; }
+
+/* -------------------------------------
+   Responsive breakpoints
+   ------------------------------------- */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr 360px; }
+}
+@media (max-width: 700px) {
+  .hero { grid-template-columns: 1fr; }
+  .nav-toggle { display:inline-block; }
+  .nav-list { display:none; position:absolute; right:10px; top:60px; background:var(--card); border:1px solid #e6e9ef; padding:8px; border-radius:8px; flex-direction:column; }
+  .nav-list.open { display:flex; }
+  .slider img { height:220px; }
+}
+
+/* main.js
+   - Responsible for site-wide interactivity:
+     * responsive nav toggle
+     * image slider (simple carousel)
+   - Functions include parameters, returns and are commented for clarity
+*/
+
+/* -------------------------
+   Utility: select helper
+   ------------------------- */
+const $ = (sel) => document.querySelector(sel);
+
+/* -------------------------
+   Nav toggle: show/hide mobile menu
+   ------------------------- */
+/**
+ * toggleNav
+ * toggles the .open class on the nav list associated with a toggle button
+ * @param {HTMLElement} button - the toggle button
+ * @param {HTMLElement} menu - the menu element to open/close
+ */
+function toggleNav(button, menu) {
+  const expanded = button.getAttribute('aria-expanded') === 'true';
+  button.setAttribute('aria-expanded', String(!expanded));
+  menu.classList.toggle('open');
+}
+
+/* wire nav buttons on all pages (multiple IDs used across pages) */
+document.addEventListener('DOMContentLoaded', () => {
+  const pairs = [
+    {btn:'#navToggle', menu:'#mainMenu'},
+    {btn:'#navToggleAbout', menu:'#menuAbout'},
+    {btn:'#navToggleContact', menu:'#menuContact'}
+  ];
+  pairs.forEach(p => {
+    const b = document.querySelector(p.btn);
+    const m = document.querySelector(p.menu);
+    if (b && m) b.addEventListener('click', () => toggleNav(b, m));
+  });
+
+  /* -------------------------
+     Slider implementation
+     - Basic carousel: moves transform on .slides
+     - Accessible controls for prev/next
+     ------------------------- */
+  const slider = document.getElementById('mainSlider');
+  if (!slider) return;
+
+  const slidesEl = slider.querySelector('.slides');
+  const imgs = Array.from(slidesEl.children);
+  let index = 0;
+  let width = slider.clientWidth;
+  let autoplayId = null;
+  const prevBtn = slider.querySelector('.slider-prev');
+  const nextBtn = slider.querySelector('.slider-next');
+
+  // compute translateX for current index
+  function updateSlider() {
+    width = slider.clientWidth;
+    slidesEl.style.transform = `translateX(-${index * width}px)`;
+    // set aria-live announcement (optional approach)
+    const imgsVisible = imgs[index];
+    imgsVisible && imgsVisible.classList.add('slide-in');
+    // remove class after animation
+    setTimeout(() => imgsVisible && imgsVisible.classList.remove('slide-in'), 500);
+  }
+
+  function next() {
+    index = (index + 1) % imgs.length;
+    updateSlider();
+  }
+  function prev() {
+    index = (index - 1 + imgs.length) % imgs.length;
+    updateSlider();
+  }
+
+  // attach buttons
+  prevBtn && prevBtn.addEventListener('click', prev);
+  nextBtn && nextBtn.addEventListener('click', next);
+
+  // autoplay
+  function startAutoplay() {
+    if (autoplayId) clearInterval(autoplayId);
+    autoplayId = setInterval(next, 4000);
+  }
+  function stopAutoplay() {
+    if (autoplayId) clearInterval(autoplayId);
+    autoplayId = null;
+  }
+
+  slider.addEventListener('mouseenter', stopAutoplay);
+  slider.addEventListener('mouseleave', startAutoplay);
+
+  // responsive: recalc on resize
+  window.addEventListener('resize', updateSlider);
+
+  // init
+  updateSlider();
+  startAutoplay();
+});
+
+/* contact.js
+   - Handles custom form validation and feedback for contact.html
+   - Demonstrates scope, parameters, return values, and DOM updates
+*/
+
+/**
+ * validateContactForm
+ * @param {Object} values - object of form values {name,email,subject,message}
+ * @returns {Array} errors - array of error strings (empty if valid)
+ */
+function validateContactForm(values) {
+  const errors = [];
+  if (!values.name || values.name.trim().length < 2) errors.push('Please enter your full name.');
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!values.email || !emailRe.test(values.email)) errors.push('Please enter a valid email address.');
+  if (!values.subject || values.subject.trim().length < 3) errors.push('Subject must be at least 3 characters.');
+  if (!values.message || values.message.trim().length < 10) errors.push('Message must be at least 10 characters.');
+  return errors;
+}
+
+/* wire form events after DOM ready */
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('contactForm');
+  const feedback = document.getElementById('contactFeedback');
+
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const values = {
+      name: form.name.value,
+      email: form.email.value,
+      subject: form.subject.value,
+      message: form.message.value
+    };
+
+    const errors = validateContactForm(values);
+    if (errors.length) {
+      feedback.innerHTML = errors.map(err => `<div class="error">${err}</div>`).join('');
+      return;
+    }
+
+    // simulate "send" and persist message to localStorage (demo)
+    const messages = JSON.parse(localStorage.getItem('aurora_messages') || '[]');
+    messages.push({ ...values, time: new Date().toISOString() });
+    localStorage.setItem('aurora_messages', JSON.stringify(messages));
+
+    feedback.innerHTML = `<div class="success">Message sent. Thank you, ${values.name}.</div>`;
+    form.reset();
+  });
+});
+

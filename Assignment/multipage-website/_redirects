@@ -1,0 +1,5 @@
+# This file is used for URL redirection when deploying on platforms like Vercel.
+# Redirect all traffic from the root to the index.html page
+/* 
+/*  Redirect all traffic to the index.html page */
+* /index.html 200

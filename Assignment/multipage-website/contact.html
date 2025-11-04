@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <h1 class="brand">My Website</h1>
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page" id="main">
+    <section id="contact" class="card" aria-labelledby="contactTitle">
+      <h2 id="contactTitle">Contact Us</h2>
+      <form id="contactForm" novalidate>
+        <div class="grid">
+          <label>
+            Name
+            <input id="name" name="name" type="text" placeholder="Your Name" required />
+          </label>
+          <label>
+            Email
+            <input id="email" name="email" type="email" placeholder="name@example.com" required />
+          </label>
+          <label>
+            Message
+            <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+          </label>
+        </div>
+        <div class="actions">
+          <button type="submit" id="submitContact">Send Message</button>
+          <div id="formFeedback" class="feedback" aria-live="polite"></div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p>© <time datetime="2025-11-04">2025</time> — My Website</p>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/contact.js"></script>
+</body>
+</html>
