@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Animated Interactive Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <h1 class="brand">Animated Interactive Demo</h1>
+      <nav aria-label="Main navigation">
+        <button id="navToggle" aria-expanded="false">Menu</button>
+        <ul id="navList" class="nav-list">
+          <li><a href="#form">Form</a></li>
+          <li><a href="#cart">Cart</a></li>
+          <li><a href="#tools">Tools</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page" id="main">
+    <!-- Form section -->
+    <section id="form" class="card" aria-labelledby="formTitle">
+      <h2 id="formTitle">Registration (custom validation)</h2>
+      <form id="customForm" novalidate>
+        <div class="grid">
+          <label>
+            Full name
+            <input id="fullName" name="fullName" type="text" placeholder="Jane Doe" />
+          </label>
+          <label>
+            Email
+            <input id="email" name="email" type="email" placeholder="name@example.com" />
+          </label>
+          <label>
+            Password
+            <input id="password" name="password" type="password" placeholder="At least 8 chars" />
+          </label>
+          <label>
+            Confirm
+            <input id="confirmPassword" name="confirmPassword" type="password" />
+          </label>
+        </div>
+        <div class="actions">
+          <button type="submit" id="submitForm">Register</button>
+          <button type="reset">Reset</button>
+          <div id="formFeedback" class="feedback" aria-live="polite"></div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Cart section -->
+    <section id="cart" class="card" aria-labelledby="cartTitle">
+      <h2 id="cartTitle">Cart & Controls</h2>
+      <div class="controls">
+        <button id="addItemBtn">Add item</button>
+        <button id="clearItemsBtn">Clear</button>
+        <button id="snapshotBtn">Snapshot</button>
+        <button id="themeBtn">Toggle theme</button>
+      </div>
+
+      <div class="cart-area">
+        <h3>Items</h3>
+        <ul id="itemList" class="item-list" aria-live="polite"></ul>
+
+        <h3>Snapshots</h3>
+        <table id="snapshotTable" class="table" aria-live="polite">
+          <thead><tr><th>Time</th><th>Count</th><th>Avg Disc</th></tr></thead>
+          <tbody id="snapshotBody"><tr><td colspan="3" class="muted">No snapshots yet</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tools section -->
+    <section id="tools" class="card" aria-labelledby="toolsTitle">
+      <h2 id="toolsTitle">Tools & Animations</h2>
+      <div class="tools-grid">
+        <div>
+          <h4>Countdown</h4>
+          <div id="countdown" class="countdown">Ready</div>
+          <button id="startCountdown">Start</button>
+        </div>
+        <div>
+          <h4>Shortcuts</h4>
+          <p>Press <kbd>A</kbd> to add an item.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p>© <time datetime="2025-11-04">2025</time> — Demo</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+/* style.css
+   - transitions and keyframe animations
+   - responsive layout (small, medium, large)
+   - comments explain sections
+*/
+
+/* ====== Base & Box Model ====== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html,body { height:100%; margin:0; font-family:system-ui,Segoe UI,Roboto,Arial; background:#f4f7fb; color:#111; }
+
+/* ====== Variables ====== */
+:root{
+  --max-width:1100px;
+  --accent:#2563eb;
+  --muted:#6b7280;
+  --card:#fff;
+  --radius:10px;
+  --gap:12px;
+}
+
+/* ====== Layout ====== */
+.header-inner, .page { max-width:var(--max-width); margin:0 auto; padding:16px; }
+.site-header { background:var(--card); border-bottom:1px solid #e6e9ef; }
+.header-inner { display:flex; align-items:center; justify-content:space-between; gap:var(--gap); }
+
+/* ====== Cards & Grid ====== */
+.card { background:var(--card); border-radius:var(--radius); padding:16px; margin:16px 0; box-shadow:0 6px 18px rgba(15,23,42,0.04); border:1px solid #eef2f7; }
+.grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; }
+.actions { display:flex; gap:8px; align-items:center; margin-top:12px; }
+
+/* ====== Buttons & controls ====== */
+button { padding:8px 12px; border:0; border-radius:8px; background:var(--accent); color:#fff; cursor:pointer; transition:transform .12s ease, box-shadow .12s ease; }
+button:active { transform:translateY(1px); box-shadow:0 2px 6px rgba(0,0,0,0.12); }
+
+/* ====== Lists & Table ====== */
+.item-list { padding-left:20px; margin:12px 0; }
+.table { width:100%; border-collapse:collapse; }
+.table th, .table td { padding:8px; border:1px solid #eef2f7; text-align:left; }
+
+/* ====== Transitions & Animations ====== */
+/* Subtle entry transition for cards */
+.card { transition: transform .25s ease, box-shadow .25s ease; }
+.card:hover { transform: translateY(-6px); box-shadow:0 18px 40px rgba(2,6,23,0.08); }
+
+/* Pulse animation for added items */
+@keyframes pulse {
+  0% { transform: scale(0.98); opacity:0.9; }
+  50% { transform: scale(1.06); opacity:1; }
+  100% { transform: scale(1); opacity:1; }
+}
+.pulse {
+  animation: pulse 600ms ease forwards;
+  transform-origin: left center;
+}
+
+/* Slide-in animation for snapshot rows */
+@keyframes slideIn {
+  from { transform: translateY(-12px); opacity:0; }
+  to { transform: translateY(0); opacity:1; }
+}
+.slide-in { animation: slideIn 420ms cubic-bezier(.2,.9,.2,1) both; }
+
+/* Countdown blink */
+@keyframes blink {
+  0%,100% { opacity:1; }
+  50% { opacity:0.2; }
+}
+.countdown.active { animation: blink 800ms linear infinite; color:var(--accent); }
+
+/* ====== Responsive ====== */
+@media (max-width: 799px) {
+  .grid { grid-template-columns: 1fr; }
+  .header-inner { flex-direction:column; align-items:flex-start; gap:8px; }
+}
+
+/* script.js
+   - Demonstrates: scope, parameters, return values, animation triggers
+   - Clearly labeled sections and comments for each part
+*/
+
+/* ---------------------------
+   Global scope variables (Part 1)
+   --------------------------- */
+const MAX_ITEMS = 12;            // constant in module/global scope
+let cartCount = 0;               // mutable state in outer scope (module-level)
+const starterNames = ['Mug','Sticker','Notebook']; // accessible to all functions
+
+/* ---------------------------
+   Utility functions (Part 2)
+   - formatTime(date): returns formatted string (parameter + return)
+   - factorial(n): returns factorial (recursive)
+   - makeDiscount(base): closure returning function (demonstrates scope)
+   --------------------------- */
+function formatTime(d = new Date()) {
+  // parameter d optional - returns string
+  return d.toLocaleString();
+}
+
+function factorial(n) {
+  // recursive example with return value
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+
+function makeDiscount(basePercent) {
+  // demonstrates closure: returned function keeps access to basePercent
+  return function(count) {
+    // parameter count, returns computed percent
+    const extra = factorial(Math.min(count, 6)) % 10;
+    return Math.max(0, Math.min(50, basePercent + extra)); // clamp 0..50%
+  };
+}
+
+/* ---------------------------
+   DOM helpers & scoped logic (Part 3)
+   - addItem(name) creates element, triggers animation, returns element
+   - canAddItem() uses outer scope (cartCount) to decide
+   --------------------------- */
+function canAddItem() {
+  return cartCount < MAX_ITEMS;
+}
+
+/**
+ * addItem
+ * @param {string} name - item name
+ * @returns {HTMLLIElement} the created list item element
+ */
+function addItem(name) {
+  if (!canAddItem()) return null; // respects outer state
+
+  const li = document.createElement('li');
+  li.textContent = `${name} — ${formatTime()}`;
+  // attach discount (using closure)
+  const discountCalc = makeDiscount(5); // base 5%
+  const discount = discountCalc(cartCount + 1);
+  li.dataset.discount = String(discount);
+
+  // trigger pulse animation when appended
+  li.classList.add('pulse');
+  // remove class after animation to allow retrigger later
+  li.addEventListener('animationend', () => li.classList.remove('pulse'), { once: true });
+
+  document.getElementById('itemList').appendChild(li);
+  cartCount++;
+  return li;
+}
+
+/* ---------------------------
+   Initialization & event wiring (Part 4)
+   - populate starter items (loop)
+   - wire buttons, keyboard shortcuts, form validation (custom)
+   - snapshot creation triggers slide-in animation for table rows
+   --------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const addBtn = document.getElementById('addItemBtn');
+  const clearBtn = document.getElementById('clearItemsBtn');
+  const snapBtn = document.getElementById('snapshotBtn');
+  const themeBtn = document.getElementById('themeBtn');
+  const startCountdown = document.getElementById('startCountdown');
+  const countdownEl = document.getElementById('countdown');
+  const snapshotBody = document.getElementById('snapshotBody');
+  const itemList = document.getElementById('itemList');
+  const form = document.getElementById('customForm');
+  const feedback = document.getElementById('formFeedback');
+  const navToggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+
+  // Starter items (for loop)
+  for (let i = 0; i < starterNames.length; i++) {
+    addItem(starterNames[i]);
+  }
+
+  // Add item button (event handling)
+  addBtn.addEventListener('click', () => {
+    const names = ['Poster','Cap','Case','Bottle','Keychain'];
+    const name = names[Math.floor(Math.random() * names.length)];
+    const li = addItem(name);
+    if (!li) {
+      feedback.textContent = `Limit reached (${MAX_ITEMS}).`;
+      feedback.className = 'feedback';
+      return;
+    }
+    feedback.textContent = `Added ${name} (total ${cartCount})`;
+  });
+
+  // Clear items button
+  clearBtn.addEventListener('click', () => {
+    while (itemList.firstChild) itemList.removeChild(itemList.firstChild);
+    cartCount = 0;
+    feedback.textContent = 'Cleared items.';
+  });
+
+  // Snapshot button: creates a table row and triggers slide-in animation
+  snapBtn.addEventListener('click', () => {
+    const rows = itemList.querySelectorAll('li');
+    const discounts = Array.from(rows).map(r => Number(r.dataset.discount || 0));
+    const avg = discounts.length ? Math.round(discounts.reduce((a,b)=>a+b,0)/discounts.length) : 0;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${formatTime()}</td><td>${rows.length}</td><td>${avg}%</td>`;
+    tr.classList.add('slide-in');
+    // prepend and let animation run
+    snapshotBody.prepend(tr);
+    // remove placeholder row if present
+    if (snapshotBody.children.length > 1) {
+      const placeholder = Array.from(snapshotBody.children).find(r => r.querySelector('td') && r.children.length === 1);
+      if (placeholder) placeholder.remove();
+    }
+  });
+
+  // Theme toggle (simple class on <html>)
+  themeBtn.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    feedback.textContent = document.documentElement.classList.contains('dark') ? 'Dark theme' : 'Light theme';
+  });
+
+  // Countdown (while-loop style via setInterval)
+  startCountdown.addEventListener('click', () => {
+    let n = 4;
+    countdownEl.textContent = `Starting in ${n}...`;
+    countdownEl.classList.add('active');
+    const id = setInterval(() => {
+      n--;
+      if (n > 0) countdownEl.textContent = `Starting in ${n}...`;
+      else {
+        clearInterval(id);
+        countdownEl.classList.remove('active');
+        countdownEl.textContent = `Done at ${formatTime()}`;
+      }
+    }, 700);
+  });
+
+  // Keyboard shortcut: press 'a' to add item
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key.toLowerCase() === 'a') {
+      addBtn.click();
+    }
+  });
+
+  // Nav toggle for small screens
+  navToggle.addEventListener('click', () => {
+    const open = navList.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+
+  /* ---------------------------
+     Custom form validation (no HTML5-only validation)
+     - demonstrates parameter passing, return of array of errors
+     --------------------------- */
+  function validateFormValues(values) {
+    const errors = [];
+    if (!values.fullName || values.fullName.trim().length < 2) {
+      errors.push('Full name must be at least 2 characters.');
+    }
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRe.test(values.email || '')) {
+      errors.push('Enter a valid email.');
+    }
+    if (!values.password || values.password.length < 8) {
+      errors.push('Password must be 8+ characters.');
+    }
+    if (values.password !== values.confirmPassword) {
+      errors.push('Passwords do not match.');
+    }
+    return errors; // return value
+  }
+
+  // Form submit handler
+  form.addEventListener('submit', (e) => {
+    e.preventDefault(); // custom validation & handling
+    const values = {
+      fullName: form.fullName.value,
+      email: form.email.value,
+      password: form.password.value,
+      confirmPassword: form.confirmPassword.value
+    };
+    const errors = validateFormValues(values);
+    if (errors.length) {
+      feedback.innerHTML = errors.map(s => `<div class="error">${s}</div>`).join('');
+      return;
+    }
+    // on success: create an item (demonstrates reuse of addItem)
+    addItem(values.fullName);
+    feedback.textContent = 'Registered & added to list.';
+    form.reset();
+  });
+
+  // End initialization
+  console.info('Animated interactive demo initialized.');
+});
+```// filepath: c:\Users\Administrator\Assignment\Assignment\script.js
+/* script.js
+   - Demonstrates: scope, parameters, return values, animation triggers
+   - Clearly labeled sections and comments for each part
+*/
+
+/* ---------------------------
+   Global scope variables (Part 1)
+   --------------------------- */
+const MAX_ITEMS = 12;            // constant in module/global scope
+let cartCount = 0;               // mutable state in outer scope (module-level)
+const starterNames = ['Mug','Sticker','Notebook']; // accessible to all functions
+
+/* ---------------------------
+   Utility functions (Part 2)
+   - formatTime(date): returns formatted string (parameter + return)
+   - factorial(n): returns factorial (recursive)
+   - makeDiscount(base): closure returning function (demonstrates scope)
+   --------------------------- */
+function formatTime(d = new Date()) {
+  // parameter d optional - returns string
+  return d.toLocaleString();
+}
+
+function factorial(n) {
+  // recursive example with return value
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+
+function makeDiscount(basePercent) {
+  // demonstrates closure: returned function keeps access to basePercent
+  return function(count) {
+    // parameter count, returns computed percent
+    const extra = factorial(Math.min(count, 6)) % 10;
+    return Math.max(0, Math.min(50, basePercent + extra)); // clamp 0..50%
+  };
+}
+
+/* ---------------------------
+   DOM helpers & scoped logic (Part 3)
+   - addItem(name) creates element, triggers animation, returns element
+   - canAddItem() uses outer scope (cartCount) to decide
+   --------------------------- */
+function canAddItem() {
+  return cartCount < MAX_ITEMS;
+}
+
+/**
+ * addItem
+ * @param {string} name - item name
+ * @returns {HTMLLIElement} the created list item element
+ */
+function addItem(name) {
+  if (!canAddItem()) return null; // respects outer state
+
+  const li = document.createElement('li');
+  li.textContent = `${name} — ${formatTime()}`;
+  // attach discount (using closure)
+  const discountCalc = makeDiscount(5); // base 5%
+  const discount = discountCalc(cartCount + 1);
+  li.dataset.discount = String(discount);
+
+  // trigger pulse animation when appended
+  li.classList.add('pulse');
+  // remove class after animation to allow retrigger later
+  li.addEventListener('animationend', () => li.classList.remove('pulse'), { once: true });
+
+  document.getElementById('itemList').appendChild(li);
+  cartCount++;
+  return li;
+}
+
+/* ---------------------------
+   Initialization & event wiring (Part 4)
+   - populate starter items (loop)
+   - wire buttons, keyboard shortcuts, form validation (custom)
+   - snapshot creation triggers slide-in animation for table rows
+   --------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const addBtn = document.getElementById('addItemBtn');
+  const clearBtn = document.getElementById('clearItemsBtn');
+  const snapBtn = document.getElementById('snapshotBtn');
+  const themeBtn = document.getElementById('themeBtn');
+  const startCountdown = document.getElementById('startCountdown');
+  const countdownEl = document.getElementById('countdown');
+  const snapshotBody = document.getElementById('snapshotBody');
+  const itemList = document.getElementById('itemList');
+  const form = document.getElementById('customForm');
+  const feedback = document.getElementById('formFeedback');
+  const navToggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+
+  // Starter items (for loop)
+  for (let i = 0; i < starterNames.length; i++) {
+    addItem(starterNames[i]);
+  }
+
+  // Add item button (event handling)
+  addBtn.addEventListener('click', () => {
+    const names = ['Poster','Cap','Case','Bottle','Keychain'];
+    const name = names[Math.floor(Math.random() * names.length)];
+    const li = addItem(name);
+    if (!li) {
+      feedback.textContent = `Limit reached (${MAX_ITEMS}).`;
+      feedback.className = 'feedback';
+      return;
+    }
+    feedback.textContent = `Added ${name} (total ${cartCount})`;
+  });
+
+  // Clear items button
+  clearBtn.addEventListener('click', () => {
+    while (itemList.firstChild) itemList.removeChild(itemList.firstChild);
+    cartCount = 0;
+    feedback.textContent = 'Cleared items.';
+  });
+
+  // Snapshot button: creates a table row and triggers slide-in animation
+  snapBtn.addEventListener('click', () => {
+    const rows = itemList.querySelectorAll('li');
+    const discounts = Array.from(rows).map(r => Number(r.dataset.discount || 0));
+    const avg = discounts.length ? Math.round(discounts.reduce((a,b)=>a+b,0)/discounts.length) : 0;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${formatTime()}</td><td>${rows.length}</td><td>${avg}%</td>`;
+    tr.classList.add('slide-in');
+    // prepend and let animation run
+    snapshotBody.prepend(tr);
+    // remove placeholder row if present
+    if (snapshotBody.children.length > 1) {
+      const placeholder = Array.from(snapshotBody.children).find(r => r.querySelector('td') && r.children.length === 1);
+      if (placeholder) placeholder.remove();
+    }
+  });
+
+  // Theme toggle (simple class on <html>)
+  themeBtn.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    feedback.textContent = document.documentElement.classList.contains('dark') ? 'Dark theme' : 'Light theme';
+  });
+
+  // Countdown (while-loop style via setInterval)
+  startCountdown.addEventListener('click', () => {
+    let n = 4;
+    countdownEl.textContent = `Starting in ${n}...`;
+    countdownEl.classList.add('active');
+    const id = setInterval(() => {
+      n--;
+      if (n > 0) countdownEl.textContent = `Starting in ${n}...`;
+      else {
+        clearInterval(id);
+        countdownEl.classList.remove('active');
+        countdownEl.textContent = `Done at ${formatTime()}`;
+      }
+    }, 700);
+  });
+
+  // Keyboard shortcut: press 'a' to add item
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key.toLowerCase() === 'a') {
+      addBtn.click();
+    }
+  });
+
+  // Nav toggle for small screens
+  navToggle.addEventListener('click', () => {
+    const open = navList.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+
+  /* ---------------------------
+     Custom form validation (no HTML5-only validation)
+     - demonstrates parameter passing, return of array of errors
+     --------------------------- */
+  function validateFormValues(values) {
+    const errors = [];
+    if (!values.fullName || values.fullName.trim().length < 2) {
+      errors.push('Full name must be at least 2 characters.');
+    }
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRe.test(values.email || '')) {
+      errors.push('Enter a valid email.');
+    }
+    if (!values.password || values.password.length < 8) {
+      errors.push('Password must be 8+ characters.');
+    }
+    if (values.password !== values.confirmPassword) {
+      errors.push('Passwords do not match.');
+    }
+    return errors; // return value
+  }
+
+  // Form submit handler
+  form.addEventListener('submit', (e) => {
+    e.preventDefault(); // custom validation & handling
+    const values = {
+      fullName: form.fullName.value,
+      email: form.email.value,
+      password: form.password.value,
+      confirmPassword: form.confirmPassword.value
+    };
+    const errors = validateFormValues(values);
+    if (errors.length) {
+      feedback.innerHTML = errors.map(s => `<div class="error">${s}</div>`).join('');
+      return;
+    }
+    // on success: create an item (demonstrates reuse of addItem)
+    addItem(values.fullName);
+    feedback.textContent = 'Registered & added to list.';
+    form.reset();
+  });
+
+  // End initialization
+  console.info('Animated interactive demo initialized.');
+});
+
