@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Enhanced Form — Accessible HTML5 Form Example</title>
+  <meta name="description" content="Accessible, semantic HTML5 form demo with validation, media, lists and table results." />
+  <style>
+    :root{font-family:system-ui,Segoe UI,Roboto,Arial;line-height:1.5;color:#111}
+    body{margin:0;padding:1rem;background:#f6f7fb}
+    header,main,footer{max-width:980px;margin:0 auto}
+    header{padding:.75rem 0}
+    .container{background:#fff;padding:1rem;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    form{display:grid;gap:0.75rem}
+    .row{display:flex;gap:.75rem;flex-wrap:wrap}
+    .col{flex:1;min-width:220px}
+    label{display:block;font-weight:600;margin-bottom:.25rem}
+    input,select,textarea,button{width:100%;padding:.5rem;border:1px solid #d1d5db;border-radius:6px}
+    fieldset{border:1px solid #e6e9ef;padding:.75rem;border-radius:6px}
+    legend{font-weight:700}
+    .hint{font-size:.875rem;color:#6b7280}
+    table{width:100%;border-collapse:collapse;margin-top:.75rem}
+    th,td{padding:.5rem;border:1px solid #e6e9ef;text-align:left}
+    .media{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+    .success{background:#ecfdf5;color:#064e3b;padding:.5rem;border-radius:6px;margin-top:.5rem}
+    .error{background:#fffbeb;color:#92400e;padding:.5rem;border-radius:6px;margin-top:.5rem}
+    footer{margin-top:1rem;text-align:center;color:#6b7280}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Enhanced Form — Accessible HTML5 Example</h1>
+    <p class="hint">Semantic layout, lists, table results, media, and a complete form demonstrating HTML5 validation and accessibility.</p>
+  </header>
+
+  <main>
+    <section class="container" aria-labelledby="form-heading">
+      <h2 id="form-heading">Registration & Order Form</h2>
+
+      <form id="enhancedForm" novalidate>
+        <fieldset>
+          <legend>Personal Information</legend>
+          <div class="row">
+            <div class="col">
+              <label for="fullName">Full name</label>
+              <input id="fullName" name="fullName" type="text" placeholder="Jane Doe" required autocomplete="name" minlength="2" />
+              <div class="hint" id="nameHint">Enter your first and last name.</div>
+            </div>
+
+            <div class="col">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="name@example.com" required autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="username">Username</label>
+              <input id="username" name="username" type="text" placeholder="user_123" required pattern="^[A-Za-z0-9_]{3,20}$" autocomplete="username" minlength="3" maxlength="20" aria-describedby="usernameHint" />
+              <div id="usernameHint" class="hint">3–20 characters, letters, numbers and underscore only.</div>
+            </div>
+
+            <div class="col">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="+1234567890" required pattern="^\+?\d{7,15}$" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="dob">Date of birth</label>
+              <input id="dob" name="dob" type="date" required max="" />
+            </div>
+
+            <div class="col">
+              <label for="timePref">Preferred contact time</label>
+              <input id="timePref" name="timePref" type="time" />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Order Details</legend>
+
+          <div class="row">
+            <div class="col">
+              <label for="product">Product</label>
+              <select id="product" name="product" required>
+                <option value="">Choose a product...</option>
+                <option value="starter">Starter Pack</option>
+                <option value="pro">Pro Pack</option>
+                <option value="enterprise">Enterprise</option>
+              </select>
+            </div>
+
+            <div class="col">
+              <label for="quantity">Quantity</label>
+              <input id="quantity" name="quantity" type="number" min="1" max="100" value="1" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="unitPrice">Unit price (readonly)</label>
+              <input id="unitPrice" name="unitPrice" type="text" value="$49.00" readonly aria-readonly="true" />
+            </div>
+
+            <div class="col">
+              <label for="discountRange">Discount level</label>
+              <input id="discountRange" name="discountRange" type="range" min="0" max="10" step="1" value="0" />
+              <output id="discountOutput">0</output>%
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label>Color options</label>
+              <div role="radiogroup" aria-labelledby="colorLabel">
+                <label><input type="radio" name="color" value="red" required /> Red</label><br/>
+                <label><input type="radio" name="color" value="blue" /> Blue</label><br/>
+                <label><input type="radio" name="color" value="green" /> Green</label>
+              </div>
+            </div>
+
+            <div class="col">
+              <label for="addNotes">Additional notes</label>
+              <textarea id="addNotes" name="addNotes" rows="3" maxlength="300" placeholder="Any special requirements..." autocomplete="off"></textarea>
+              <div class="hint">Max 300 characters.</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="fileUpload">Upload reference (image)</label>
+              <input id="fileUpload" name="fileUpload" type="file" accept="image/*" aria-describedby="fileHint" required />
+              <div id="fileHint" class="hint">PNG/JPG/GIF up to 5MB.</div>
+            </div>
+
+            <div class="col">
+              <label for="agree">Terms</label>
+              <div>
+                <label><input id="agree" name="agree" type="checkbox" required /> I agree to the terms and conditions</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Account Security</legend>
+          <div class="row">
+            <div class="col">
+              <label for="password">Password</label>
+              <input id="password" name="password" type="password" required minlength="8" placeholder="At least 8 characters" autocomplete="new-password" />
+            </div>
+            <div class="col">
+              <label for="confirmPassword">Confirm password</label>
+              <input id="confirmPassword" name="confirmPassword" type="password" required autocomplete="new-password" />
+            </div>
+          </div>
+          <div class="hint">Passwords must match. The form will validate on submit.</div>
+        </fieldset>
+
+        <div class="row" style="align-items:center">
+          <button type="submit">Submit order</button>
+          <button type="reset">Reset</button>
+          <div id="formMessage" aria-live="polite" style="flex:1"></div>
+        </div>
+      </form>
+
+      <section aria-labelledby="results-heading" style="margin-top:1rem">
+        <h3 id="results-heading">Submitted entries</h3>
+        <p class="hint">Entries submitted in this session are shown below.</p>
+
+        <table aria-describedby="results-description">
+          <caption id="results-description" class="sr-only">A list of submitted form entries</caption>
+          <thead>
+            <tr><th>Timestamp</th><th>Name</th><th>Email</th><th>Product</th><th>Quantity</th></tr>
+          </thead>
+          <tbody id="resultsBody">
+            <tr><td colspan="5" class="hint">No entries yet</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+
+    <aside class="container" aria-labelledby="media-heading" style="margin-top:1rem">
+      <h2 id="media-heading">Media & Resources</h2>
+
+      <p>Useful resources:</p>
+      <ul>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener">HTML reference (MDN)</a></li>
+        <li><a href="https://www.w3.org/WAI/" target="_blank" rel="noopener">Web Accessibility Initiative (WAI)</a></li>
+      </ul>
+
+      <div class="media" aria-hidden="false">
+        <figure style="max-width:320px">
+          <img src="https://picsum.photos/seed/form/320/180" alt="Decorative form illustration" style="width:100%;height:auto;border-radius:6px" />
+          <figcaption class="hint">Illustration: form layout</figcaption>
+        </figure>
+
+        <figure style="max-width:320px">
+          <video controls width="320" aria-label="Short demo video">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+            Your browser does not support the video element.
+          </video>
+          <figcaption class="hint">Demo video (public sample).</figcaption>
+        </figure>
+      </div>
+    </aside>
+
+    <section class="container" aria-labelledby="features-heading" style="margin-top:1rem">
+      <h2 id="features-heading">Form features (summary)</h2>
+      <ol>
+        <li>Semantic markup: fieldset/legend, label associations, ARIA where helpful.</li>
+        <li>HTML5 validation: required, type constraints, minlength/maxlength, pattern, min/max.</li>
+        <li>Accessibility: aria-live messages, descriptive hints, keyboard-accessible controls.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <time datetime="2025-11-04">2025</time> — Accessible demo form</p>
+  </footer>
+
+  <script>
+    // Populate max date for DOB (must be at least 13 years old)
+    (function setDobMax(){
+      const dob = document.getElementById('dob');
+      const today = new Date();
+      today.setFullYear(today.getFullYear() - 13);
+      dob.max = today.toISOString().split('T')[0];
+    })();
+
+    const form = document.getElementById('enhancedForm');
+    const resultsBody = document.getElementById('resultsBody');
+    const formMessage = document.getElementById('formMessage');
+    const discountRange = document.getElementById('discountRange');
+    const discountOutput = document.getElementById('discountOutput');
+
+    discountOutput.value = discountRange.value;
+    discountRange.addEventListener('input', () => discountOutput.textContent = discountRange.value);
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // HTML5 validation
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        formMessage.textContent = 'Please fix the highlighted fields.';
+        formMessage.className = 'error';
+        return;
+      }
+
+      // Additional validation: password match
+      const pwd = form.password.value;
+      const conf = form.confirmPassword.value;
+      if (pwd !== conf) {
+        formMessage.textContent = 'Passwords do not match.';
+        formMessage.className = 'error';
+        form.confirmPassword.focus();
+        return;
+      }
+
+      // Build result row
+      const now = new Date().toLocaleString();
+      const row = document.createElement('tr');
+      row.innerHTML = `<td>${now}</td>
+                       <td>${escapeHtml(form.fullName.value)}</td>
+                       <td><a href="mailto:${escapeHtml(form.email.value)}">${escapeHtml(form.email.value)}</a></td>
+                       <td>${escapeHtml(form.product.value)}</td>
+                       <td>${escapeHtml(form.quantity.value)}</td>`;
+      // Remove placeholder row if present
+      if (resultsBody.children.length === 1 && resultsBody.children[0].children.length === 1) {
+        resultsBody.innerHTML = '';
+      }
+      resultsBody.prepend(row);
+
+      formMessage.textContent = 'Order submitted successfully.';
+      formMessage.className = 'success';
+
+      // Optionally reset file input while keeping other fields
+      form.fileUpload.value = '';
+      form.reset();
+    });
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+    }
+  </script>
+</body>
+</html>
