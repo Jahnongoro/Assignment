@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Interactive Demo — Form, Cart & Utilities</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="brand">Interactive Demo</h1>
+      <nav class="main-nav" aria-label="Main">
+        <button id="navToggle" class="nav-toggle" aria-expanded="false">Menu</button>
+        <ul id="navList" class="nav-list">
+          <li><a href="#formSection">Form</a></li>
+          <li><a href="#cartSection">Cart</a></li>
+          <li><a href="#toolsSection">Tools</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <!-- Part: Custom form -->
+    <section id="formSection" class="panel" aria-labelledby="formTitle">
+      <h2 id="formTitle">Custom Registration Form</h2>
+      <p class="muted">This form uses JavaScript-driven validation (no HTML5-only validation enforcement).</p>
+
+      <form id="customForm" novalidate>
+        <div class="form-grid">
+          <label>
+            Full name
+            <input id="fullName" name="fullName" type="text" placeholder="Jane Doe" autocomplete="name" />
+          </label>
+
+          <label>
+            Email
+            <input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" />
+          </label>
+
+          <label>
+            Quantity
+            <input id="quantity" name="quantity" type="number" value="1" min="1" />
+          </label>
+
+          <label>
+            Password
+            <input id="password" name="password" type="password" placeholder="At least 8 chars" autocomplete="new-password" />
+          </label>
+
+          <label>
+            Confirm password
+            <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" />
+          </label>
+
+          <label class="full">
+            Notes
+            <textarea id="notes" name="notes" rows="3" placeholder="Optional notes..."></textarea>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="submitForm">Register</button>
+          <button type="reset">Reset</button>
+          <div id="formFeedback" aria-live="polite" class="feedback"></div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Part: Cart and interactive controls -->
+    <section id="cartSection" class="panel" aria-labelledby="cartTitle">
+      <h2 id="cartTitle">Cart & Controls</h2>
+      <div id="controls" class="controls">
+        <button id="addItemBtn">Add random item</button>
+        <button id="clearItemsBtn">Clear items</button>
+        <button id="snapshotBtn">Record snapshot</button>
+        <button id="themeToggle">Toggle theme</button>
+      </div>
+
+      <div class="cart-area">
+        <h3>Items</h3>
+        <ul id="itemList" class="item-list" aria-live="polite"></ul>
+
+        <h3>Snapshots</h3>
+        <table id="snapshotTable" class="table">
+          <thead><tr><th>Time</th><th>Count</th><th>Avg Discount</th></tr></thead>
+          <tbody id="snapshotBody"><tr><td colspan="3" class="muted">No snapshots yet</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Part: Tools / small utilities -->
+    <section id="toolsSection" class="panel" aria-labelledby="toolsTitle">
+      <h2 id="toolsTitle">Tools</h2>
+      <div class="tools-grid">
+        <div class="tool">
+          <h4>Countdown demo</h4>
+          <div id="countdown" class="countdown">Ready</div>
+          <button id="startCountdown">Start</button>
+        </div>
+
+        <div class="tool">
+          <h4>Live actions</h4>
+          <p>Press the "A" key to add an item (keyboard shortcut).</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <time datetime="2025-11-04">2025</time> — Demo project</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
