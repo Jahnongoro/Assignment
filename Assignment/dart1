@@ -1,0 +1,33 @@
+// filepath: c:\Users\Administrator\Assignment\Assignment\combined_example.dart
+abstract class Logger {
+  // concrete method
+  void info(String msg) => print('INFO: $msg');
+
+  // abstract method
+  void error(String msg);
+}
+
+// Extending: inherit concrete implementation, only implement abstract members
+class FileLogger extends Logger {
+  @override
+  void error(String msg) => print('FILE ERROR: $msg');
+}
+
+// Implementing the same abstract class: must provide all members (including concrete ones)
+class MockLogger implements Logger {
+  @override
+  void info(String msg) => print('MOCK INFO: $msg');
+
+  @override
+  void error(String msg) => print('MOCK ERROR: $msg');
+}
+
+void main() {
+  final f = FileLogger();
+  f.info('started');    // inherited concrete method
+  f.error('failed');    // implemented abstract method
+
+  final m = MockLogger();
+  m.info('test');       // implemented explicitly
+  m.error('test error');
+}

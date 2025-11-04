@@ -1,0 +1,45 @@
+import 'dart:io';
+
+void main() {
+  // String Manipulation
+  String userInput = 'Hello, Dart!';
+  String reversed = userInput.split('').reversed.join('');
+  String upperCase = userInput.toUpperCase();
+  String lowerCase = userInput.toLowerCase();
+
+  print('Original: $userInput');
+  print('Reversed: $reversed');
+  print('Uppercase: $upperCase');
+  print('Lowercase: $lowerCase');
+
+  // Collections
+  List<String> fruits = ['Apple', 'Banana', 'Cherry'];
+  Set<String> uniqueFruits = {'Apple', 'Banana', 'Apple'}; // Set removes duplicates
+  Map<String, int> fruitPrices = {'Apple': 2, 'Banana': 1, 'Cherry': 3};
+
+  print('Fruits List: $fruits');
+  print('Unique Fruits Set: $uniqueFruits');
+  print('Fruit Prices: $fruitPrices');
+
+  // File Handling
+  String inputFilePath = 'input.txt'; // Ensure this file exists
+  String outputFilePath = 'output.txt';
+
+  try {
+    // Read from file
+    String content = File(inputFilePath).readAsStringSync();
+    print('Content from $inputFilePath: $content');
+
+    // Write to file
+    File(outputFilePath).writeAsStringSync('Processed: $content\nDate: ${DateTime.now()}');
+    print('Written to $outputFilePath');
+  } catch (e) {
+    print('Error: $e');
+  }
+
+  // Date and Time
+  DateTime now = DateTime.now();
+  DateTime futureDate = now.add(Duration(days: 7));
+  print('Current Date: ${now.toLocal()}');
+  print('Date after 7 days: ${futureDate.toLocal()}');
+}

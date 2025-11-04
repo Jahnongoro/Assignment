@@ -1,0 +1,136 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run current Dart file",
+      "type": "dart",
+      "request": "launch",
+      "program": "${workspaceFolder}/path/to/your_file.dart"
+    }
+  ]
+}
+import 'dart:math';
+
+// Sample shopping cart and utilities demonstrating:
+// - anonymous function for filtering
+// - higher-order function for discounts
+// - recursive factorial for extra discount calculation
+// - optional tax in total calculation
+
+int factorial(int n) {
+  // recursive factorial (safe for small n)
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+
+// Higher-order function: returns a function that applies a percent discount to a list of prices
+List<double> Function(List<double>) makeDiscountApplier(double percent) {
+  return (List<double> prices) =>
+      prices.map((p) => p * (1 - percent / 100)).toList();
+}
+
+// Calculate total with optional taxPercent
+double calculateTotal(List<double> prices, {double taxPercent = 0.0}) {
+  final subtotal = prices.fold<double>(0.0, (a, b) => a + b);
+  return subtotal * (1 + taxPercent / 100);
+}
+
+void main() {
+  // initial cart (mix of prices)
+  final List<double> cart = [5.0, 12.0, 25.5, 9.99, 100.0, 11.0];
+
+  print('Original cart: $cart');
+
+  // 1) Filter items: remove items below $10 using an anonymous function
+  final filteredCart =
+      cart.where((price) => price >= 10.0).toList(); // anonymous predicate
+  print('After filtering (< \$10 removed): $filteredCart');
+
+  // 2) Apply discount: use a higher-order function to reduce prices by a percentage
+  final apply15Percent = makeDiscountApplier(15.0);
+  final discountedCart = apply15Percent(filteredCart);
+  print('After 15% discount: ${discountedCart.map((p) => p.toStringAsFixed(2)).toList()}');
+
+  // 3) Factorial discount: compute an extra discount based on factorial of item count
+  final itemCount = discountedCart.length;
+  final fact = factorial(itemCount);
+  // derive a reasonable small extra discount percent from factorial, e.g. (factorial % 10)
+  final extraDiscountPercent = (fact % 10).toDouble();
+  print('Item count: $itemCount, factorial: $fact, extra discount: $extraDiscountPercent%');
+
+  final applyExtra = makeDiscountApplier(extraDiscountPercent);
+  final afterExtraDiscount = applyExtra(discountedCart);
+  print('After extra factorial discount: ${afterExtraDiscount.map((p) => p.toStringAsFixed(2)).toList()}');
+
+  // 4) Calculate total with optional tax (e.g., 8%)
+  final taxPercent = 8.0;
+  final finalTotal = calculateTotal(afterExtraDiscount, taxPercent: taxPercent);
+  print('Final total with ${taxPercent}% tax: \$${finalTotal.toStringAsFixed(2)}');
+
+  // 5) Display final breakdown per item (anonymous function used for printing)
+  print('\nFinal items and prices:');
+  afterExtraDiscount.asMap().forEach((i, price) => print('  Item ${i + 1}: \$${price.toStringAsFixed(2)}'));
+}
+```// filepath: c:\Users\Administrator\Assignment\Assignment\shopping_cart.dart
+import 'dart:math';
+
+// Sample shopping cart and utilities demonstrating:
+// - anonymous function for filtering
+// - higher-order function for discounts
+// - recursive factorial for extra discount calculation
+// - optional tax in total calculation
+
+int factorial(int n) {
+  // recursive factorial (safe for small n)
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+
+// Higher-order function: returns a function that applies a percent discount to a list of prices
+List<double> Function(List<double>) makeDiscountApplier(double percent) {
+  return (List<double> prices) =>
+      prices.map((p) => p * (1 - percent / 100)).toList();
+}
+
+// Calculate total with optional taxPercent
+double calculateTotal(List<double> prices, {double taxPercent = 0.0}) {
+  final subtotal = prices.fold<double>(0.0, (a, b) => a + b);
+  return subtotal * (1 + taxPercent / 100);
+}
+
+void main() {
+  // initial cart (mix of prices)
+  final List<double> cart = [5.0, 12.0, 25.5, 9.99, 100.0, 11.0];
+
+  print('Original cart: $cart');
+
+  // 1) Filter items: remove items below $10 using an anonymous function
+  final filteredCart =
+      cart.where((price) => price >= 10.0).toList(); // anonymous predicate
+  print('After filtering (< \$10 removed): $filteredCart');
+
+  // 2) Apply discount: use a higher-order function to reduce prices by a percentage
+  final apply15Percent = makeDiscountApplier(15.0);
+  final discountedCart = apply15Percent(filteredCart);
+  print('After 15% discount: ${discountedCart.map((p) => p.toStringAsFixed(2)).toList()}');
+
+  // 3) Factorial discount: compute an extra discount based on factorial of item count
+  final itemCount = discountedCart.length;
+  final fact = factorial(itemCount);
+  // derive a reasonable small extra discount percent from factorial, e.g. (factorial % 10)
+  final extraDiscountPercent = (fact % 10).toDouble();
+  print('Item count: $itemCount, factorial: $fact, extra discount: $extraDiscountPercent%');
+
+  final applyExtra = makeDiscountApplier(extraDiscountPercent);
+  final afterExtraDiscount = applyExtra(discountedCart);
+  print('After extra factorial discount: ${afterExtraDiscount.map((p) => p.toStringAsFixed(2)).toList()}');
+
+  // 4) Calculate total with optional tax (e.g., 8%)
+  final taxPercent = 8.0;
+  final finalTotal = calculateTotal(afterExtraDiscount, taxPercent: taxPercent);
+  print('Final total with ${taxPercent}% tax: \$${finalTotal.toStringAsFixed(2)}');
+
+  // 5) Display final breakdown per item (anonymous function used for printing)
+  print('\nFinal items and prices:');
+  afterExtraDiscount.asMap().forEach((i, price) => print('  Item ${i + 1}: \$${price.toStringAsFixed(2)}'));
+}
