@@ -67,3 +67,5 @@ confidence_interval = stats.t.interval(confidence_level, degrees_freedom, mean, 
 
 print(f"95% Confidence Interval: {confidence_interval}")
 
+
+
